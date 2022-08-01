@@ -11,13 +11,18 @@
     <div class="options">
         <label for="option-select">Choose a option:</label>
 
-        <select name="options" id="work-select">
+        <select name="options" id="work-select" required>
             <option value="">Please choose an option &#127947
             </option>
                 <option value="small-dumbbells">Small dumbbells</option>
                 <option value="large-barbell">Large barbell</option>
                 <option value="Thai-box">Thai box</option> 
         </select>
+    </div>
+
+    <div class="work-progress">
+        <label for="progress">Work progress:</label>
+        <progress id="progress" max="100" value="50"></progress>
     </div>
 
     
