@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="work-calc.js" defer></script>
     <title>Work Calculator</title>
 </head>
 <body>
@@ -21,22 +22,22 @@
     </div>
 
     <div class="work-progress">
-        <label for="progress">Work progress:</label>
+        <label for="progress">Workout progress:</label>
         <progress id="progress" max="100" value="50"></progress>
     </div>
 
     <div class="button">
-        <button type="button">
+        <button type="button" id="confirm-button">
             Confirm &#9989;
         </button>
     </div>
 
     <div class="time-selector">
-        <label for="tentacles">Work time&#9201;:</label>
+        <label for="tentacles">Workout time&#9201;:</label>
         <input type="number" id="tentacles" name="tentacles"
        min="0" max="200">minutes
     </div>
 
-    
+   
 </body>
 </html>
