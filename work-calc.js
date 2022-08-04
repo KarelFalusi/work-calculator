@@ -8,6 +8,7 @@ let workSelect = document.getElementById("work-select");
 let workProgress = document.getElementById("progress");
 let timeSelect = document.getElementById("tentacles");
 let confirmButton = document.getElementById("confirm-button");
+let dateTime = new Date().toLocaleString();
 
 workSelect.addEventListener('change', function () {
     if (workSelect.value === '') {
@@ -44,9 +45,10 @@ confirmButton.addEventListener('click', function () {
         workOption: workSelect.value,
         progress: workProgress.value,
         time: timeSelect.value,
+        dateAndTime: dateTime
     };
     console.log(object);
-    data.push(object);    
+    data.push(object);
     console.log(data)
     localStorage.setItem('info', JSON.stringify(data))
 });
