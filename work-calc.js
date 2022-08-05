@@ -8,47 +8,123 @@ let workSelect = document.getElementById("work-select");
 let workProgress = document.getElementById("progress");
 let timeSelect = document.getElementById("tentacles");
 let confirmButton = document.getElementById("confirm-button");
-let dateTime = new Date().toLocaleString();
-
-workSelect.addEventListener('change', function () {
-    if (workSelect.value === '') {
-        console.log('Please choose the workout option.');
-    } else {
-        console.log('User choice is', workSelect.value);
-    }
-
-});
-
-timeSelect.addEventListener('change', function () {
-    if (timeSelect.value === '') {
-        console.log('Please choose time you worked');
-    } else {
-        console.log('User worked', timeSelect.value, 'minutes');
-    }
-});
-
-function work() {
-    if (workSelect.value === '' && timeSelect.value === '') {
-        console.log('Missing workout method and worked time.');
-    } else if (workSelect.value === '') {
-        console.log('Please choose the workout method.');
-    } else if (timeSelect.value === '') {
-        console.log('Please choose the time you worked.');
-    } else {
-        console.log('User workout option was', workSelect.value, 'And User worked', timeSelect.value, 'minutes');
-    }
-};
+let date = new Date().toISOString().slice(0, 10);
+let ulElement = document.getElementById('work-history');
 
 
+// pri kliku na confirm
 confirmButton.addEventListener('click', function () {
     let object = {
         workOption: workSelect.value,
-        progress: workProgress.value,
-        time: timeSelect.value,
-        dateAndTime: dateTime
+        time: Number(timeSelect.value),
+        date: date
     };
     console.log(object);
     data.push(object);
-    console.log(data)
     localStorage.setItem('info', JSON.stringify(data))
+    calculateProgress();
 });
+
+
+// pri nacteni stranky
+function calculateProgress() {
+    let monday = new Date();
+    monday.setDate(monday.getDate() - monday.getDay() + 1);
+    monday = monday.toISOString().slice(0, 10);
+
+    let dataOfThisWeek = data.filter(object => object.date >= monday);
+    console.log(dataOfThisWeek);
+
+
+    let timeOfThisWeek = data.reduce((acc, object) => {
+        return acc + object.time
+    }, 0);
+    console.log(timeOfThisWeek, 'min');
+    workProgress.value = timeOfThisWeek;
+    ulElement.innerHTML = dataOfThisWeek.map(object => {
+        return `
+            <li>
+                ${object.date}
+                ${object.workOption}
+                ${object.time} minutes
+            </li>
+                `
+    }).join("");
+
+};
+calculateProgress();
+
+
+// stopwatch
+function timeToString(time) {
+    let diffInHrs = time / 3600000;
+    let hh = Math.floor(diffInHrs);
+  
+    let diffInMin = (diffInHrs - hh) * 60;
+    let mm = Math.floor(diffInMin);
+  
+    let diffInSec = (diffInMin - mm) * 60;
+    let ss = Math.floor(diffInSec);
+  
+    let diffInMs = (diffInSec - ss) * 100;
+    let ms = Math.floor(diffInMs);
+  
+    let formattedMM = mm.toString().padStart(2, "0");
+    let formattedSS = ss.toString().padStart(2, "0");
+    let formattedMS = ms.toString().padStart(2, "0");
+  
+    return `${formattedMM}:${formattedSS}:${formattedMS}`;
+  }
+  
+  // Declare variables to use in our functions below
+  
+  let startTime;
+  let elapsedTime = 0;
+  let timerInterval;
+  
+  // Create function to modify innerHTML
+  
+  function print(txt) {
+    document.getElementById("display").innerHTML = txt;
+  }
+  
+  // Create "start", "pause" and "reset" functions
+  
+  function start() {
+    startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(function printTime() {
+      elapsedTime = Date.now() - startTime;
+      print(timeToString(elapsedTime));
+    }, 10);
+    showButton("PAUSE");
+  }
+  
+  function pause() {
+    clearInterval(timerInterval);
+    showButton("PLAY");
+  }
+  
+  function reset() {
+    clearInterval(timerInterval);
+    print("00:00:00");
+    elapsedTime = 0;
+    showButton("PLAY");
+  }
+  
+  // Create function to display buttons
+  
+  function showButton(buttonKey) {
+    const buttonToShow = buttonKey === "PLAY" ? playButton : pauseButton;
+    const buttonToHide = buttonKey === "PLAY" ? pauseButton : playButton;
+    buttonToShow.style.display = "block";
+    buttonToHide.style.display = "none";
+  }
+  // Create event listeners
+  
+  let playButton = document.getElementById("playButton");
+  let pauseButton = document.getElementById("pauseButton");
+  let resetButton = document.getElementById("resetButton");
+  
+  playButton.addEventListener("click", start);
+  pauseButton.addEventListener("click", pause);
+  resetButton.addEventListener("click", reset);
