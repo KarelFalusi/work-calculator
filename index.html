@@ -15,56 +15,59 @@
 </head>
 
 <body>
-  <h1>Work calculator</h1>
-  <div class="options">
-    <label for="option-select">Choose a option:</label>
+  <div class="container">
+    <div class="flex">
+      <h1>Work calculator</h1>
+      <div class="options">
+        <label for="option-select">Choose a option:</label>
 
-    <select name="options" id="work-select" required>
-      <option value="">Please choose an option &#127947;
-      </option>
-      <option value="small-dumbbells">Small dumbbells</option>
-      <option value="large-barbell">Large barbell</option>
-      <option value="Thai-box">Thai box</option>
-    </select>
-  </div>
+        <select name="options" id="work-select" required>
+          <option value="">Please choose an option &#127947;
+          </option>
+          <option value="small-dumbbells">Small dumbbells</option>
+          <option value="large-barbell">Large barbell</option>
+          <option value="Thai-box">Thai box</option>
+        </select>
+      </div>
 
-  <div class="time-selector">
-    <label for="tentacles">Workout time&#9201;:</label>
-    <input type="number" id="tentacles" name="tentacles" min="0" max="200">minutes
-  </div>
-  <div class="button">
-    <button type="button" id="confirm-button">
-      Confirm &#9989;
-    </button>
-  </div>
+      <div class="time-selector">
+        <label for="tentacles">Workout time&#9201;:</label>
+        <input type="number" id="tentacles" name="tentacles" min="0" max="200">minutes
+      </div>
+      <div class="button">
+        <button type="button" id="confirm-button">
+          Confirm &#9989;
+        </button>
+      </div>
 
-  <ul id="work-history"></ul>
-  <ul id="total"></ul>
+      <ul id="work-history"></ul>
+      <div id="total"></div>
 
-  <div class="work-progress">
-    <label for="progress">Workout progress:</label>
-    <progress id="progress" max="200"></progress>
-  </div>
-
-  <div class="stopwatch">
-
-    <div class="circle">
-      <span class="time" id="display">0:00:00</span>
-    </div>
-
-    <div class="controls">
-      <button class="buttonPlay">
-        <img id="playButton"
-          src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/play-button_opkxmt.svg" />
-
-        <img id="pauseButton"
-          src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
-      </button>
-
-      <button class="buttonReset">
-        <img id="resetButton"
-          src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
-      </button>
+      <div class="work-progress">
+        <label for="progress">Workout progress:</label>
+        <progress id="progress" max="200"></progress>
+      </div>
+      
+      <div class="stopwatch">
+        <div class="circle">
+          <span class="time" id="display">0:00:00</span>
+        </div>
+        
+        <div class="controls">
+          <button class="buttonPlay">
+            <img id="playButton"
+            src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/play-button_opkxmt.svg" />
+            
+            <img id="pauseButton"
+            src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/pause-button_pinhpy.svg" />
+          </button>
+          
+          <button class="buttonReset">
+            <img id="resetButton"
+            src="https://res.cloudinary.com/https-tinloof-com/image/upload/v1593360448/blog/time-in-js/reset-button_mdv6wf.svg" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
